@@ -56,6 +56,7 @@
 #include "v_draw.h"
 #include "doommenu.h"
 #include "sbar.h"
+#include "r_utility.h"
 
 FIntermissionDescriptorList IntermissionDescriptors;
 
@@ -217,6 +218,7 @@ bool DIntermissionScreen::CheckOverlay(int i)
 
 void DIntermissionScreen::Drawer ()
 {
+	r_NoInterpolate = true;
 	if (mBackground.isValid())
 	{
 		if (!mFlatfill)
@@ -256,6 +258,7 @@ void DIntermissionScreen::OnDestroy()
 
 void DIntermissionScreenFader::Init(FIntermissionAction *desc, bool first)
 {
+	r_NoInterpolate = false;
 	Super::Init(desc, first);
 	mType = static_cast<FIntermissionActionFader*>(desc)->mFadeType;
 }
